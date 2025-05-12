@@ -4,8 +4,9 @@
 #include<time.h>
 
 void print_file_stats(const char *filename, const struct stat *file_stat){
-    printf("Info about: %s\n", filename);
+    printf("=================Info about: %s=================\n", filename);
     printf("File type: ");
+
     if(S_ISREG(file_stat->st_mode)){
     	printf("regular\n");
     }else if(S_ISBLK(file_stat->st_mode)){
@@ -17,14 +18,16 @@ void print_file_stats(const char *filename, const struct stat *file_stat){
     }else{
     	printf("No such type found\n");
     }
-    printf("Inode number: %d\n", file_stat->st_ino);
+
     printf("File size: %ld byte\n", file_stat->st_size);
-    printf("Link count: %d\n", file_stat->st_nlink);
+    printf("Inode number: %ld\n", file_stat->st_ino);
+    printf("Link count: %ld\n", file_stat->st_nlink);
+    printf("Access rights: %o\n", file_stat->st_mode & 0777);
     printf("User ID: %d\n", file_stat->st_uid);
     printf("Group ID: %d\n", file_stat->st_gid);
     printf("Last access timestamp: %s", ctime(&file_stat->st_atime));
     printf("Last modification timestamp: %s", ctime(&file_stat->st_mtime));
-    printf("Last status change timestamo: %s", ctime(&file_stat->st_ctime));
+    printf("Last status change timestamo: %s\n", ctime(&file_stat->st_ctime));
 }
 
 int main(int argc, char *argv[]){
