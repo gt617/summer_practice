@@ -1,22 +1,30 @@
 #include<stdio.h>
 #include<string.h>
 #include<sys/stat.h>
+#include<time.h>
 
-void print_file_stats(const char *filename, const struct stat *file_stats){
+void print_file_stats(const char *filename, const struct stat *file_stat){
     printf("Info about: %s\n", filename);
     printf("File type: ");
-    if(S_ISREG(file_stats->st_mode)){
+    if(S_ISREG(file_stat->st_mode)){
     	printf("regular\n");
-    }else if(S_ISBLK(file_stats->st_mode)){
+    }else if(S_ISBLK(file_stat->st_mode)){
     	printf("block device\n");
-    }else if(S_ISCHR(file_stats->st_mode)){
+    }else if(S_ISCHR(file_stat->st_mode)){
     	printf("character device\n");
-    }else if(S_ISDIR(file_stats->st_mode)){
+    }else if(S_ISDIR(file_stat->st_mode)){
     	printf("directory\n");
     }else{
     	printf("No such type found\n");
     }
-    return NULL;
+    printf("Inode number: %d\n", file_stat->st_ino);
+    printf("File size: %ld byte\n", file_stat->st_size);
+    printf("Link count: %d\n", file_stat->st_nlink);
+    printf("User ID: %d\n", file_stat->st_uid);
+    printf("Group ID: %d\n", file_stat->st_gid);
+    printf("Last access timestamp: %s", ctime(&file_stat->st_atime));
+    printf("Last modification timestamp: %s", ctime(&file_stat->st_mtime));
+    printf("Last status change timestamo: %s", ctime(&file_stat->st_ctime));
 }
 
 int main(int argc, char *argv[]){
@@ -27,11 +35,11 @@ int main(int argc, char *argv[]){
     }
 
     for(i = 1; i < argc; i++){
-    	struct stat file_stats;
-	if(stat(argv[i], &file_stats) == -1){
+    	struct stat file_stat;
+	if(stat(argv[i], &file_stat) == -1){
 	    perror("Error while getting file stats");
 	}
-	print_file_stats(argv[i], &file_stats);
+	print_file_stats(argv[i], &file_stat);
     }
     return 0;
 }	
