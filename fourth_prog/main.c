@@ -75,12 +75,12 @@ int main(int argc, char *argv[]){
 
     printf("Options are correct: ");
     for(i = 0; i < mcst_cnt; i++){
-    	if(mcst){
-	    printf("%c, ", mcst[i]);
-	}
+	printf("%c, ", mcst[i]);
     }
+    if(elbrus_cnt > 0){
     for(i = strlen(mcst)+1; i < argc; i++){
     	printf("%s ,", argv[i]);
+    }
     }
     if(optind < argc){
         printf("non-options: ");
