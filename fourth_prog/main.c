@@ -2,15 +2,14 @@
 #include"parser.h"
 
 int main(int argc, char *argv[]){
-    int opt, i;
+	int opt, i;
 	int report = 1, elbrus_cnt = 0, mcst_cnt = 0, elbrus_base_size = 3;
-    char mcst[MCST_SIZE] = {0};
-    
-    char **elbrus_val = malloc(elbrus_base_size*sizeof(char *));
-    check_alloc(elbrus_val);
-
-    while((opt = getopt_long(argc, argv, "mcste:h", long_option, NULL)) != -1){
-        switch(opt){
+	char mcst[MCST_SIZE] = {0};
+	char **elbrus_val = malloc(elbrus_base_size*sizeof(char *));
+	check_alloc(elbrus_val);
+	
+	while((opt = getopt_long(argc, argv, "mcste:h", long_option, NULL)) != -1){
+		switch(opt){
 			case 'm':
 			mcst[mcst_cnt++] = 'm';
 			break;
