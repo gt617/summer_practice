@@ -1,6 +1,8 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<string.h>
 #include<getopt.h>
+#define MCST_SIZE 5
 
 const char *elbrus_value[] = {"1c+", "2c+", "2c3", "4c", "8c", "16c", NULL};
 
@@ -32,9 +34,10 @@ void help(){
 
 int main(int argc, char *argv[]){
     int opt, i, point, elbrus_cnt = 0, mcst_cnt = 0;
-    char *elbrus_val[6] = {0};
-    char mcst[5] = {0};
-    
+    char mcst[MCST_SIZE] = {0};
+    int elbrus_base_size = 3;
+    char **elbrus_values = malloc(elbrus_base_size*sizeof(char *));
+
     while((opt = getopt_long(argc, argv, "mcste:h", long_option, NULL)) != -1){
         switch(opt){
 	    case 'm':
@@ -53,22 +56,25 @@ int main(int argc, char *argv[]){
 		if(!elbrus_valid(optarg)){
 		    printf("Error with elbrus arguments.\n");
 		    return 1;
-		}else{
-		    if(elbrus_cnt == 0){
-			printf("%d", optind);
-		        point = optind;
-		    }
-		    elbrus_cnt++;
 		}
+		if(elbrus_cnt>=elbrus_base_size){
+		    elbrus_base_size *= 2;
+		    char **tmp = realloc(elbrus_values, elbrus_base_size*sizeof(char *));
+		    elbrus_values = tmp;
+		}
+                elbrus_values[elbrus_cnt++] = optarg;
 		break;
 	    case 'h':
 		help();
+		free(elbrus_values);
 		return 0;
 	    case '?':
 		fprintf(stderr, "Options are incorrect:");
+		free(elbrus_values);
 		return 1;
 	    default:
 		fprintf(stderr, "Not found\n");
+		free(elbrus_values);
 		return 1;
 	}
     }
@@ -77,18 +83,18 @@ int main(int argc, char *argv[]){
     for(i = 0; i < mcst_cnt; i++){
 	printf("%c, ", mcst[i]);
     }
-    if(elbrus_cnt > 0){
-    for(i = strlen(mcst)+1; i < argc; i++){
-    	printf("%s ,", argv[i]);
+    for(i = 0; i < elbrus_cnt; i++){
+    	printf("elbrus=%s%s", elbrus_values[i], (i == elbrus_cnt-1) ? "":", ");
     }
-    }
+    printf(" ");
     if(optind < argc){
         printf("non-options: ");
         for(i = optind; i < argc; i++){
-            printf("%s ,", argv[i]);
+            printf("%s%s", argv[i], (i == argc-1) ? "":", ");
         }
     }
     printf("\n");
+    free(elbrus_values);
     return 0;
 }
 
