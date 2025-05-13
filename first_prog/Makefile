@@ -1,4 +1,4 @@
-Mylab : main.o thread.o
+Thread : main.o thread.o
 	gcc main.o thread.o -o First
 
 main.o : main.c

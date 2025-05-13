@@ -1,5 +1,4 @@
 #ifndef PARSER_H
-#define PARSER_H
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
@@ -17,4 +16,5 @@ static struct option long_option[] = {
 int elbrus_valid(const char *);
 void help();
 int check_alloc(char **);
+
 #endif
