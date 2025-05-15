@@ -7,7 +7,7 @@ int main(){
     pthread_t pthread;
     srand(time(NULL));
     
-    for(i = 0; i < SIZE; i++){
+    for(i = 0; i < SIZE; i++){  //Заполнение массива случайными числами
         arr[i] = rand() % 100;
     }
     printf("Before sort:\n");

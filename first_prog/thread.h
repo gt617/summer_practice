@@ -4,6 +4,7 @@
 #include<pthread.h>
 #define SIZE 20
 
+//Структура для аргументов потока
 typedef struct thread_args{
     int *arr;
     int left, right;

@@ -7,7 +7,7 @@ void swap(int *a, int *b){
     *b = tmp;
 }
 
-int get_part(int *arr, int left, int right){
+int get_part(int *arr, int left, int right){  //Разделение массива на части
     int pivot = arr[right];
     int less = left, i;
 
@@ -32,17 +32,17 @@ void *quick_sort(void *args){
     thread_args left_args = {arr, left, pivot - 1};
     thread_args right_args = {arr, pivot + 1, right};
     
-    pthread_t left_thread, right_thread;
+    pthread_t left_thread, right_thread;  //Создание потоков для сортировки левой и правой частей
     int left_check = pthread_create(&left_thread, NULL, quick_sort, &left_args);
     int right_check = pthread_create(&right_thread, NULL, quick_sort, &right_args);
     
     if(left_check !=0 || right_check !=0){
-        if(left_check == 0){
+        if(left_check == 0){  //Если левый поток завершился, сортируется правая часть
             pthread_join(left_thread, NULL);
             quick_sort(&right_args);
-        }else if(right_check == 0){
+        }else if(right_check == 0){  //Если правый поток завершился, сортируется левая часть
             pthread_join(right_thread, NULL);
-            quick_sort(&right_args);
+            quick_sort(&left_args);
         }else{
             quick_sort(&right_args);
             quick_sort(&left_args);
