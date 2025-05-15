@@ -6,6 +6,7 @@ void print_file_stats(const char *filename, const struct stat *file_stat){
     printf("=================Info about: %s=================\n", filename);
     printf("File type: ");
 
+    // Определене типа файла
     if(S_ISREG(file_stat->st_mode)){
     	printf("regular\n");
     }else if(S_ISBLK(file_stat->st_mode)){
@@ -36,12 +37,13 @@ int main(int argc, char *argv[]){
 	return 1;
     }
 
+    // Проход по всем переданным файлам
     for(i = 1; i < argc; i++){
     	struct stat file_stat;
-	if(stat(argv[i], &file_stat) == -1){
-	    perror("Error while getting file stats");
-	}
-	print_file_stats(argv[i], &file_stat);
+	    if(stat(argv[i], &file_stat) == -1){
+	        perror("Error while getting file stats");
+	    }
+	    print_file_stats(argv[i], &file_stat);
     }
     return 0;
 }	

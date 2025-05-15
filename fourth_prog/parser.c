@@ -1,5 +1,6 @@
 #include "parser.h"
 
+// Функция проверки аргументов elbrus
 int elbrus_valid(const char *value){
     int i;
     for(i = 0; elbrus_value[i] != NULL; i++){

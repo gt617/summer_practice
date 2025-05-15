@@ -4,8 +4,8 @@
 int main(int argc, char *argv[]){
     int opt, i;
     int report = 1, elbrus_cnt = 0, mcst_cnt = 0, elbrus_base_size = 3;
-    char mcst[MCST_SIZE] = {0};
-    char **elbrus_val = malloc(elbrus_base_size*sizeof(char *));
+    char mcst[MCST_SIZE] = {0}; // массив для аргументов mcst
+    char **elbrus_val = malloc(elbrus_base_size*sizeof(char *));  // массив для аргументов elbrus
     check_alloc(elbrus_val);
 	
     while((opt = getopt_long(argc, argv, "mcste:h", long_option, NULL)) != -1){
@@ -23,12 +23,12 @@ int main(int argc, char *argv[]){
             mcst[mcst_cnt++] = 't';
             break;
             case 'e':
-            if(!elbrus_valid(optarg)){
+            if(!elbrus_valid(optarg)){  // Проверка валидности данных
                 printf("Error with elbrus arguments.\n");
                 free(elbrus_val);
                 return 1;
             }
-            if(elbrus_cnt>=elbrus_base_size){
+            if(elbrus_cnt>=elbrus_base_size){ // Если аргументов много, массив увеличивается
                 elbrus_base_size *= 2;
                 char **tmp = realloc(elbrus_val, elbrus_base_size*sizeof(char *));
                 check_alloc(tmp);
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
             report = 0;
         }
     }
-    if(!report){
+    if(!report){  // Если введены неверные данные
         printf("Options are incorrect\n");
         free(elbrus_val);
         return 1;
@@ -73,5 +73,3 @@ int main(int argc, char *argv[]){
     free(elbrus_val);
     return 0;
 }
-
-
