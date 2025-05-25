@@ -10,11 +10,15 @@ int main(){
     int fd = open("nonexist.txt", O_RDWR);
     int i = 0;
     if(fd == -1){
-        printf("Erroe number: %d\n", errno);
-        perror("Error opening file");
-        printf("Errlist: %s", _sys_errlist[errno]);
+        printf("Error number: %d\n", errno);
+        perror("Perror:");
+        if(errno >= 0 && errno < _sys_nerr){
+            printf("Errlist: %s", _sys_errlist[errno]);
+        }else{
+            printf("Unknown error\n");
+        }
     }else{
-    printf("File somefile.txt opend seccessufully\nFile descriptor: %d\n", fd);
+    printf("File nonexist.txt opend seccessufully\nFile descriptor: %d\n", fd);
     close(fd);
     }
     return 0;
