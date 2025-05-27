@@ -18,8 +18,8 @@ int main(){
             printf("Unknown error\n");
         }
     }else{
-    printf("File nonexist.txt opend seccessufully\nFile descriptor: %d\n", fd);
-    close(fd);
+        printf("File nonexist.txt opend seccessufully\nFile descriptor: %d\n", fd);
+        close(fd);
     }
     return 0;
 }
