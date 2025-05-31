@@ -8,4 +8,4 @@ parser.o : parser.c
 	gcc -c parser.c -o parser.o
 
 clean:
-	rm -rf *.o
+	rm -rf *.o *.exe Pars

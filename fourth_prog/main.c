@@ -9,6 +9,12 @@ int main(int argc, char *argv[]){
     char mcst[MCST_SIZE] = {0}; // Массив для аргументов mcst
     char **elbrus_val = malloc(elbrus_base_size*sizeof(char *));  // Массив для аргументов elbrus
     check_alloc(elbrus_val);
+
+    if(argc < 2){
+        printf("Usage: %s -options\n", argv[0]);
+        printf("For help enter %s -h\n", argv[0]);
+        return 1;
+    }
 	
     while((opt = getopt_long(argc, argv, "mcste:h", long_option, NULL)) != -1){
         switch(opt){
