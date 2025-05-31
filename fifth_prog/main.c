@@ -3,19 +3,19 @@
 #include<fcntl.h>
 #include<unistd.h>
 
-extern int _sys_nerr;
-extern __const char *__const _sys_errlist[];
+extern int _sys_nerr;  // общее количество ошибок в системе
+extern __const char *__const _sys_errlist[];  // массив строк с описаниями ошибок
 
 int main(){
-    int fd = open("nonexist.txt", O_RDWR);
+    int fd = open("nonexist.txt", O_RDWR);  // открываем несуществующий файл
     int i = 0;
     if(fd == -1){
-        printf("Error number: %d\n", errno);
-        perror("Perror:");
-        if(errno >= 0 && errno < _sys_nerr){
-            printf("Errlist: %s", _sys_errlist[errno]);
+        printf("Error number: %d\n", errno);  // Выводим номер ошибки (errno)
+        perror("Perror");  // Выводим сообщение об ошибке через perror
+        if(errno >= 0 && errno < _sys_nerr){ // Проверям, находится ли номер в диапазоне ошибок
+            printf("Errlist: %s", _sys_errlist[errno]); // Выводим ошибку из системного списка
         }else{
-            printf("Unknown error\n");
+            printf("Unknown error\n"); // Если номер вне диапазона
         }
     }else{
         printf("File nonexist.txt opend seccessufully\nFile descriptor: %d\n", fd);
