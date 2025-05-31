@@ -1,4 +1,5 @@
-#ifndef THREAD
+#ifndef THREAD_H
+#define THREAD_H
 #include<stdio.h>
 #include<stdlib.h>
 #include<pthread.h>
