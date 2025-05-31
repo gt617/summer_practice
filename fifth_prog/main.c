@@ -7,7 +7,7 @@ extern int _sys_nerr;  // общее количество ошибок в сис
 extern __const char *__const _sys_errlist[];  // массив строк с описаниями ошибок
 
 int main(){
-    int fd = open("nonexist.txt", O_RDWR);  // открываем несуществующий файл
+    int fd = open("nonexist.txt", O_RDWR);  // Oткрываем несуществующий файл
     int i = 0;
     if(fd == -1){
         printf("Error number: %d\n", errno);  // Выводим номер ошибки (errno)
