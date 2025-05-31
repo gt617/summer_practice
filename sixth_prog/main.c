@@ -1,7 +1,8 @@
-#include<stdio.h>
-#include<sys/stat.h>
-#include<time.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <time.h>
 
+// Вывод информации о файле
 void print_file_stats(const char *filename, const struct stat *file_stat){
     printf("=================Info about: %s=================\n", filename);
     printf("File type: ");
@@ -39,9 +40,10 @@ int main(int argc, char *argv[]){
 
     // Проход по всем переданным файлам
     for(i = 1; i < argc; i++){
-    	struct stat file_stat;
+    	struct stat file_stat;  // Структура для хранения информации о файле
 	    if(stat(argv[i], &file_stat) == -1){
 	        perror("Error while getting file stats");
+            continue;
 	    }
 	    print_file_stats(argv[i], &file_stat);
     }
