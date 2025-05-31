@@ -5,21 +5,24 @@ volatile sig_atomic_t signal_count = 0;
 volatile sig_atomic_t i_cur = 0;
 volatile sig_atomic_t j_cur = 0;
 
+// Обработчик сигнала через signal
 void signal_handler(int sig){
     if(sig == SIGINT){
         signal_count++;
         printf("\nSIGINT was recived. Current iterators: matrix1[%d][%d], matrix2[%d][%d]\n", i_cur, j_cur, j_cur, i_cur);
         if(signal_count == 1){
-            signal(SIGINT, SIG_DFL);
+            signal(SIGINT, SIG_DFL);  // Меняем обработчик на стандартный
         }
     }
 }
 
+// Обрабочик сигнала через sigaction
 void sigaction_handler(int sig, siginfo_t *info, void *context){
     if(sig == SIGINT){
         signal_count++;
         printf("\nSIGINT was recived. Current iterators: matrix1[%d][%d], matrix2[%d][%d]\n", i_cur, j_cur, j_cur, i_cur);
         if(signal_count == 1){
+            // Меняем обработчик на стандартный
             struct sigaction act;
             act.sa_handler = SIG_DFL;
             sigemptyset(&act.sa_mask);
@@ -29,6 +32,7 @@ void sigaction_handler(int sig, siginfo_t *info, void *context){
     }
 }
 
+// Заполнение матриц рандомными числами от 0 до 99
 void random_fill(int matrix1[SIZE][SIZE], int matrix2[SIZE][SIZE]){
     int i, j;
     srand(time(NULL));
@@ -40,15 +44,7 @@ void random_fill(int matrix1[SIZE][SIZE], int matrix2[SIZE][SIZE]){
     }
 }
 
-void print_matrix(int matrix[SIZE][SIZE]){
-    int i, j;
-    for(i =0; i < SIZE; i++){
-        for(j = 0; j < SIZE; j++){
-            printf(j == SIZE-1 ? "%d\n" : "%d ", matrix[i][j]);
-        }
-    }
-}
-
+// Перемножение матриц
 void multiply(int matrix1[SIZE][SIZE], int matrix2[SIZE][SIZE], int result[SIZE][SIZE]){
     int i, j, k;
     for(i = 0; i < SIZE; i++){
@@ -63,3 +59,14 @@ void multiply(int matrix1[SIZE][SIZE], int matrix2[SIZE][SIZE], int result[SIZE]
         }
     }
 }
+
+/* Вывод матрицы на экран
+void print_matrix(int matrix[SIZE][SIZE]){
+    int i, j;
+    for(i =0; i < SIZE; i++){
+        for(j = 0; j < SIZE; j++){
+            printf(j == SIZE-1 ? "%d\n" : "%d ", matrix[i][j]);
+        }
+    }
+}
+*/
