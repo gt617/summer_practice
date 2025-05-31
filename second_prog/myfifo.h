@@ -7,8 +7,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-#define FIFO_1 "fifo_file1"
-#define FIFO_2 "fifo_file2"
+#define FIFO_1 "/tmp/fifo_file1"
+#define FIFO_2 "/tmp/fifo_file2"
 
 void make_fifo(char *);
 void clean();
