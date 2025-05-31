@@ -5,6 +5,7 @@
 #include<getopt.h>
 #define MCST_SIZE 5  //Длина массива для аргументов mcst + \0
 
+// Допустимые значения для аргумента elbrus
 static const char *elbrus_value[] = {
     "1c+", "2c+", "2c3", "4c", "8c", "16c", NULL};
 

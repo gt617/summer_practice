@@ -11,6 +11,7 @@ int elbrus_valid(const char *value){
     return 0;
 }
 
+// Вывод справки
 void help(){
     printf("SYNOPSIS: ./main [OPTIONS]... [FILE]...\n");
     printf("DESCRIPTION\n");
@@ -21,6 +22,7 @@ void help(){
     printf("	--elbrus=[1c+, 2c+, 2c3, 4c, 8c, 16c]\n");
 }
 
+// Проверка создания массива
 int check_alloc(char **array){
     if(!array){
         fprintf(stderr, "Memory error");
