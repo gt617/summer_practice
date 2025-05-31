@@ -4,7 +4,7 @@
 #include<unistd.h>
 
 extern int _sys_nerr;  // общее количество ошибок в системе
-extern __const char *__const _sys_errlist[];  // массив строк с описаниями ошибок
+extern __const char *__const _sys_errlist[];  // Массив строк с описаниями ошибок
 
 int main(){
     int fd = open("nonexist.txt", O_RDWR);  // Oткрываем несуществующий файл
