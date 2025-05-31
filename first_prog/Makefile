@@ -8,4 +8,4 @@ thread.o : thread.c
 	gcc -c thread.c -o thread.o
 
 clean:
-	rm -rf *.o *.exe
+	rm -rf *.o *.exe Thread

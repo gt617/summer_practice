@@ -4,10 +4,10 @@
 #include<pthread.h>
 #define SIZE 20
 
-//Структура для аргументов потока
+// Структура для аргументов потока
 typedef struct thread_args{
-    int *arr;
-    int left, right;
+    int *arr; // Указатель на массив
+    int left, right; // Левая и правая границы
 } thread_args;
 
 void swap(int *, int *);
